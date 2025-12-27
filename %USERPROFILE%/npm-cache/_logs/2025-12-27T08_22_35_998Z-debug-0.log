@@ -1,0 +1,38 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.1.0
+2 info using node@v22.14.0
+3 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Dell\.npmrc
+5 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\etc\npmrc
+6 verbose title npm start
+7 verbose argv "start"
+8 verbose logfile logs-max:10 dir:C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_22_35_998Z-
+9 verbose logfile C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_22_35_998Z-debug-0.log
+10 silly logfile done cleaning log files
+11 verbose stack Error: Missing script: "start"
+11 verbose stack
+11 verbose stack Did you mean one of these?
+11 verbose stack   npm star # Mark your favorite packages
+11 verbose stack   npm stars # View packages marked as favorites
+11 verbose stack
+11 verbose stack To see a list of scripts, run:
+11 verbose stack   npm run
+11 verbose stack     at #run (C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\lib\commands\run-script.js:111:13)
+11 verbose stack     at async RunScript.exec (C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\lib\commands\run-script.js:40:7)
+11 verbose stack     at async Npm.exec (C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\lib\npm.js:207:9)
+11 verbose stack     at async module.exports (C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\lib\cli\entry.js:67:5)
+12 error Missing script: "start"
+12 error
+12 error Did you mean one of these?
+12 error   npm star # Mark your favorite packages
+12 error   npm stars # View packages marked as favorites
+12 error
+12 error To see a list of scripts, run:
+12 error   npm run
+13 verbose cwd C:\Users\Dell\Desktop\Ai
+14 verbose os Windows_NT 10.0.26220
+15 verbose node v22.14.0
+16 verbose npm  v11.1.0
+17 verbose exit 1
+18 verbose code 1
+19 error A complete log of this run can be found in: C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_22_35_998Z-debug-0.log

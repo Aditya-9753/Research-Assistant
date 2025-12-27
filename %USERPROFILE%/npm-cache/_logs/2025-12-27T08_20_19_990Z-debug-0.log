@@ -1,0 +1,14 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.1.0
+2 info using node@v22.14.0
+3 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Dell\.npmrc
+5 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\etc\npmrc
+6 verbose title npm create vite@latest
+7 verbose argv "create" "vite@latest"
+8 verbose logfile logs-max:10 dir:C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_20_19_990Z-
+9 verbose logfile C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_20_19_990Z-debug-0.log
+10 silly logfile done cleaning log files
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 http fetch GET 200 https://registry.npmjs.org/create-vite 512ms (cache revalidated)
+13 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912

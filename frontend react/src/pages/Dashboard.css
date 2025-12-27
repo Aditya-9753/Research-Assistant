@@ -1,0 +1,85 @@
+/* ===============================
+   Professional SaaS Dashboard CSS
+   =============================== */
+
+.dashboard-page {
+  min-height: 100vh;
+  background-color: #0b1220;
+  padding: 64px 16px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Main Card */
+.dashboard-card {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.dashboard-title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #111827;
+}
+
+.dashboard-subtitle {
+  font-size: 15px;
+  color: #6b7280;
+}
+
+/* Input Section */
+.dashboard-input-box {
+  background: #f9fafb;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Button */
+.dashboard-button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #020617;
+}
+
+.dashboard-button:disabled {
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Result */
+.dashboard-result {
+  margin-top: 28px;
+}
+
+/* Footer */
+.dashboard-footer {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 12px;
+  color: #6b7280;
+}

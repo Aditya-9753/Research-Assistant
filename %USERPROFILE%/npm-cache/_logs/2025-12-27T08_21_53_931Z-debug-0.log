@@ -1,0 +1,12 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.1.0
+2 info using node@v22.14.0
+3 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Dell\Desktop\Ai\frontend react\.npmrc
+5 silly config load:file:C:\Users\Dell\.npmrc
+6 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm run dev
+8 verbose argv "run" "dev"
+9 verbose logfile logs-max:10 dir:C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_21_53_931Z-
+10 verbose logfile C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_21_53_931Z-debug-0.log
+11 silly logfile done cleaning log files

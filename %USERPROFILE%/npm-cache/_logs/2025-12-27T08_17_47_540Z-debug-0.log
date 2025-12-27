@@ -1,0 +1,39 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.1.0
+2 info using node@v22.14.0
+3 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Dell\.npmrc
+5 silly config load:file:C:\Users\Dell\AppData\Roaming\npm\etc\npmrc
+6 verbose title npm create vite@latest
+7 verbose argv "create" "vite@latest"
+8 verbose logfile logs-max:10 dir:C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_17_47_540Z-
+9 verbose logfile C:\Users\Dell\Desktop\Ai\%USERPROFILE%\npm-cache\_logs\2025-12-27T08_17_47_540Z-debug-0.log
+10 silly logfile done cleaning log files
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 http fetch GET 200 https://registry.npmjs.org/create-vite 366ms (cache miss)
+13 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+14 http fetch GET 200 https://registry.npmjs.org/npm 851ms
+15 silly idealTree buildDeps
+16 silly fetch manifest create-vite@8.2.0
+17 silly packumentCache full:https://registry.npmjs.org/create-vite cache-miss
+18 http fetch GET 200 https://registry.npmjs.org/create-vite 169ms (cache miss)
+19 silly packumentCache full:https://registry.npmjs.org/create-vite set size:undefined disposed:false
+20 silly placeDep ROOT create-vite@8.2.0 OK for:  want: 8.2.0
+21 silly reify moves {}
+22 silly audit bulk request { 'create-vite': [ '8.2.0' ] }
+23 http cache create-vite@https://registry.npmjs.org/create-vite/-/create-vite-8.2.0.tgz 1ms (cache hit)
+24 silly tarball no local data for create-vite@https://registry.npmjs.org/create-vite/-/create-vite-8.2.0.tgz. Extracting by manifest.
+25 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 464ms
+26 silly audit report {}
+27 http fetch GET 200 https://registry.npmjs.org/create-vite/-/create-vite-8.2.0.tgz 899ms (cache miss)
+28 verbose cwd C:\Users\Dell\Desktop\Ai
+29 verbose os Windows_NT 10.0.26220
+30 verbose node v22.14.0
+31 verbose npm  v11.1.0
+32 notice
+32 notice New [33mminor[39m version of npm available! [33m11.1.0[39m -> [34m11.7.0[39m
+32 notice Changelog: [34mhttps://github.com/npm/cli/releases/tag/v11.7.0[39m
+32 notice To update run: [4mnpm install -g npm@11.7.0[24m
+32 notice  { force: true, [Symbol(proc-log.meta)]: true }
+33 verbose exit 0
+34 info ok
