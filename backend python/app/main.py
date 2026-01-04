@@ -1,31 +1,50 @@
 # app/main.py
+
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 import traceback
+import logging
 
-from app.database.sqlite import SessionLocal, engine
+from app.database.sqlite import engine, get_db   # ✅ IMPORT get_db
 from app.database import models
 from app.database.crud import get_history
 from app.schemas import ResearchRequest, ResearchResponse, HistoryRecord
 from app.services import process_research
 
-# -------------------------
-# App Initialization
-# -------------------------
+# Analytics router
+from app.analytics.routes import router as analytics_router
+
+# -------------------------------------------------
+# Logging Setup
+# -------------------------------------------------
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# -------------------------------------------------
+# Database Init
+# -------------------------------------------------
 
 models.Base.metadata.create_all(bind=engine)
+
+# -------------------------------------------------
+# App Initialization
+# -------------------------------------------------
 
 app = FastAPI(
     title="AI Equity Research Assistant",
     description="Equity research API using real URL content analysis",
-    version="1.1.0"
+    version="1.2.0",
 )
 
-# -------------------------
-# CORS (Frontend access)
-# -------------------------
+# -------------------------------------------------
+# CORS
+# -------------------------------------------------
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,20 +57,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# -------------------------
-# Dependencies
-# -------------------------
+# -------------------------------------------------
+# Startup / Shutdown
+# -------------------------------------------------
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+@app.on_event("startup")
+def on_startup():
+    logger.info("🚀 Application startup completed")
 
-# -------------------------
+
+@app.on_event("shutdown")
+def on_shutdown():
+    logger.info("🛑 Application shutdown completed")
+
+# -------------------------------------------------
 # Health
-# -------------------------
+# -------------------------------------------------
 
 @app.get("/", tags=["Health"])
 def root():
@@ -61,13 +82,14 @@ def root():
         "docs": "/docs",
     }
 
+
 @app.get("/health", tags=["Health"])
 def health_check():
     return {"status": "ok"}
 
-# -------------------------
+# -------------------------------------------------
 # API v1 – Research
-# -------------------------
+# -------------------------------------------------
 
 @app.post(
     "/api/v1/research",
@@ -80,30 +102,27 @@ def research_endpoint(
     db: Session = Depends(get_db),
 ):
     try:
-        # 🔥 Core business logic
+        logger.info(f"📥 Research request received | mode={req.mode}")
         return process_research(db, req.url, req.mode)
 
-    except ValueError as e:
-        # URL / content / validation related errors
+    except ValueError as exc:
+        logger.warning(f"⚠️ Validation error: {exc}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e),
+            detail=str(exc),
         )
 
-    except Exception as e:
-        # 🔥 FULL TRACEBACK FOR DEBUGGING
-        print("\n========== INTERNAL SERVER ERROR ==========")
+    except Exception:
+        logger.error("🔥 Internal server error during research")
         traceback.print_exc()
-        print("=========================================\n")
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e),
+            detail="Internal server error",
         )
 
-# -------------------------
+# -------------------------------------------------
 # API v1 – History
-# -------------------------
+# -------------------------------------------------
 
 @app.get(
     "/api/v1/history",
@@ -121,3 +140,12 @@ def history_endpoint(
         )
 
     return get_history(db, limit)
+
+# -------------------------------------------------
+# API v1 – Analytics
+# -------------------------------------------------
+
+app.include_router(
+    analytics_router,
+    prefix="/api/v1",
+)

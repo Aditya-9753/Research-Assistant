@@ -1,85 +1,114 @@
+
 /* ===============================
-   Professional SaaS Dashboard CSS
+   CLEAN FULL-PAGE DASHBOARD
    =============================== */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FULL PAGE (after sidebar) */
 .dashboard-page {
-  min-height: 100vh;
+  height: 100vh;
+  width: calc(100vw - 240px);
+  margin-left: 240px;
+
   background-color: #0b1220;
-  padding: 64px 16px;
+
+  padding: 32px 40px;
+  overflow-y: auto;
+
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Main Card */
+/* REMOVE CARD FEEL — FULL WIDTH CONTENT */
 .dashboard-card {
-  max-width: 960px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+
   background: #ffffff;
-  padding: 40px;
-  border-radius: 14px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  padding: 32px;
+
+  border-radius: 8px;
 }
 
-/* Header */
+/* HEADER */
 .dashboard-header {
-  text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 .dashboard-title {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 600;
-  margin-bottom: 6px;
   color: #111827;
 }
 
 .dashboard-subtitle {
-  font-size: 15px;
+  font-size: 14px;
   color: #6b7280;
 }
 
-/* Input Section */
+/* INPUT AREA */
 .dashboard-input-box {
   background: #f9fafb;
   padding: 24px;
-  border-radius: 12px;
-  margin-bottom: 24px;
+  border-radius: 8px;
   border: 1px solid #e5e7eb;
+  margin-bottom: 24px;
 }
 
-/* Button */
+/* BUTTON */
 .dashboard-button {
   width: 100%;
   margin-top: 16px;
   padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #1f2937;
-  background-color: #111827;
+
+  background: #020617;
   color: #ffffff;
-  font-size: 15px;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .dashboard-button:hover {
-  background-color: #020617;
+  background: #111827;
 }
 
 .dashboard-button:disabled {
-  background-color: #9ca3af;
-  border-color: #9ca3af;
+  background: #9ca3af;
   cursor: not-allowed;
 }
 
-/* Result */
+/* RESULT */
 .dashboard-result {
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
-/* Footer */
+/* FOOTER */
 .dashboard-footer {
-  text-align: center;
-  margin-top: 28px;
+  margin-top: 32px;
   font-size: 12px;
   color: #6b7280;
+}
+
+/* ===============================
+   MOBILE FIX
+   =============================== */
+@media (max-width: 768px) {
+  .dashboard-page {
+    width: 100vw;
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .dashboard-card {
+    padding: 20px;
+    min-height: auto;
+  }
 }

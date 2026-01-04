@@ -11,22 +11,24 @@ export default function Dashboard() {
   const [mode, setMode] = useState("summary");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
 
   const handleAnalyze = async () => {
     if (!url.startsWith("http")) {
-      alert("Please enter a valid URL (http/https)");
+      setError("Please enter a valid URL (http/https)");
       return;
     }
 
     setLoading(true);
     setResult(null);
+    setError("");
 
     try {
       const res = await API.post("/research", { url, mode });
       setResult(res.data);
-      return;
-    } catch {
-      console.warn("Backend unavailable → Using frontend analysis");
+    } catch (err) {
+      console.warn("Backend unavailable", err);
+      setError("Backend not responding. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -41,7 +43,7 @@ export default function Dashboard() {
             AI Equity Research Assistant
           </h1>
           <p className="dashboard-subtitle">
-            Analyze real web content with AI-style insights
+            Analyze real web content with AI-powered insights
           </p>
         </div>
 
@@ -57,6 +59,12 @@ export default function Dashboard() {
           >
             {loading ? "Analyzing..." : "Run Analysis"}
           </button>
+
+          {error && (
+            <p style={{ color: "red", marginTop: "12px", fontSize: "14px" }}>
+              {error}
+            </p>
+          )}
         </div>
 
         {/* RESULT */}
@@ -64,12 +72,12 @@ export default function Dashboard() {
           {loading && <Loader />}
           {result && <ResultCard data={result} />}
         </div>
-      </div>
 
-      {/* FOOTER */}
-      <p className="dashboard-footer">
-        © {new Date().getFullYear()} AI Equity Research Assistant
-      </p>
+        {/* FOOTER */}
+        <div className="dashboard-footer">
+          © {new Date().getFullYear()} AI Equity Research Assistant
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,329 @@
+:root {
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 80px;
+}
+
+/* ===============================
+   PERFECT CENTER DASHBOARD - FIXED WITH SIDEBAR
+   =============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scroll issues */
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--sidebar-width);
+  background: #020617;
+  color: white;
+  padding: 20px;
+  transition: width 0.3s ease;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+  padding: 20px 10px; /* Reduce padding when collapsed */
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #1e293b; /* Subtle divider */
+}
+
+.sidebar-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: #1e293b;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #cbd5f5;
+  padding: 12px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.sidebar-nav a:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.sidebar-nav a.active {
+  background: #2563eb;
+  color: white;
+}
+
+/* Full page wrapper - Adjusted for sidebar */
+.dashboard-page {
+  min-height: 100vh;
+  width: 100%;
+  /* Dark background gradient */
+  background: radial-gradient(
+    circle at top,
+    #0f172a 0%,
+    #020617 75%
+  );
+  /* Padding to account for sidebar - ensures content starts after sidebar */
+  padding-top: 0; /* Remove top padding for full height */
+  padding-right: 20px;
+  padding-bottom: 0; /* Remove bottom padding for full height */
+  padding-left: var(--sidebar-width); /* Exact sidebar width offset */
+  /* FLEXBOX CENTERING within the available space after sidebar */
+  display: flex;
+  justify-content: center; /* Horizontal Center in remaining space */
+  align-items: center; /* Vertical Center */
+  position: relative; /* For any overlays if needed */
+}
+
+/* Adjust for collapsed sidebar */
+.sidebar.collapsed ~ .dashboard-page {
+  padding-left: var(--sidebar-collapsed-width);
+}
+
+/* White dashboard card - Now truly centered in the remaining viewport */
+.dashboard-card {
+  width: 100%;
+  max-width: 880px;
+  /* No margin needed with flex centering */
+  background: #ffffff;
+  padding: 48px; /* Increased padding for better breathing room */
+  border-radius: 20px; /* Slightly larger radius for modern feel */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05); /* Modern shadow */
+  /* Smooth entry animation */
+  animation: fadeInUp 0.6s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-title {
+  font-size: 32px; /* Slightly larger for impact */
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Input section - Improved styling */
+.dashboard-input-box {
+  background: #f8fafc;
+  padding: 0; /* Remove padding, handle inside */
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 24px;
+  overflow: hidden; /* For clean borders */
+}
+
+.dashboard-input-group {
+  padding: 24px;
+}
+
+.dashboard-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 16px;
+  color: #0f172a;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.dashboard-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.dashboard-select-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.dashboard-select {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+/* Button - Enhanced */
+.dashboard-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); /* Gradient for depth */
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+  text-transform: none; /* Keep natural case */
+}
+
+.dashboard-button:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(37, 99, 235, 0.4);
+}
+
+.dashboard-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+}
+
+/* Footer */
+.dashboard-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+   =============================== */
+
+/* Tablet and smaller laptops */
+@media (max-width: 1024px) {
+  .dashboard-card {
+    max-width: 100%;
+    padding: 32px;
+    margin: 0 20px;
+  }
+  
+  .dashboard-page {
+    padding-left: var(--sidebar-width);
+    padding-right: 20px;
+  }
+  
+  .sidebar.collapsed ~ .dashboard-page {
+    padding-left: var(--sidebar-collapsed-width);
+  }
+}
+
+/* Mobile - Hide sidebar by default, show as overlay if needed */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%); /* Hidden off-screen */
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open { /* Add .open class via JS for mobile toggle */
+    transform: translateX(0);
+  }
+  
+  .dashboard-page {
+    padding-left: 0 !important; /* No sidebar offset */
+    padding: 20px 15px;
+    justify-content: center;
+    align-items: flex-start; /* Top-aligned on mobile */
+    min-height: 100vh;
+  }
+  
+  .dashboard-card {
+    padding: 24px;
+    margin: 20px 0;
+    border-radius: 16px;
+    max-width: none;
+  }
+ 
+  .dashboard-title {
+    font-size: 24px;
+  }
+  
+  .dashboard-subtitle {
+    font-size: 15px;
+  }
+  
+  .dashboard-input-group {
+    padding: 20px;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1440px) {
+  .dashboard-card {
+    max-width: 1000px;
+    padding: 60px;
+  }
+}
