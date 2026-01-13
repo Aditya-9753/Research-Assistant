@@ -1,5 +1,3 @@
----
-
 <div align="center">
   <h1>🤖 AI Research Assistant</h1>
   <h3>AI-Powered Full-Stack Research & Query Analysis Platform</h3>
@@ -22,8 +20,6 @@
 
   <br><br>
 </div>
-
----
 
 ## 🧠 What is AI Research Assistant?
 
