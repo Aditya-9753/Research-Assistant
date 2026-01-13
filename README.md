@@ -85,10 +85,10 @@ Uvicorn
 ```
 
 
-```
+
 
 📂 Project Structure
-
+```
 Research-Assistant/
 ├── frontend/               # React Frontend
 │   ├── src/
