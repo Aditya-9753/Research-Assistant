@@ -141,8 +141,8 @@ Env
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-```▶️ Run Backend Server
-
+▶️ Run Backend Server
+```
 uvicorn app.main:app --reload
 ```
 
