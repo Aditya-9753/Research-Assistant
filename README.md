@@ -61,7 +61,7 @@ React UI
 🛠️ Tech Stack
 
 🌐 Frontend
-
+```
 React.js
 
 JavaScript (ES6+)
@@ -69,10 +69,10 @@ JavaScript (ES6+)
 Tailwind CSS / CSS
 
 Axios
-
+```
 
 ⚙️ Backend
-
+```
 Python
 
 FastAPI
@@ -82,7 +82,7 @@ OpenAI API
 SQLite
 
 Uvicorn
-
+```
 
 
 ```
