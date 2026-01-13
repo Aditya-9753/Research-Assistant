@@ -149,7 +149,7 @@ uvicorn app.main:app --reload
 
 
 🚀 Future Enhancements
-
+```
 User authentication & profiles
 
 Chat history & research saving
@@ -159,16 +159,16 @@ Multi-model AI support
 Dockerized deployment
 
 Cloud hosting
-
+```
 
 
 
 
 🤝 Contribution
-
+```
 Contributions are welcome!
 Fork the repository, make your changes, and submit a pull request.
-
+```
 
 
 <div align="center">
