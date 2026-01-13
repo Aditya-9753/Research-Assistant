@@ -108,16 +108,16 @@ Research-Assistant/
 ⚙️ Installation & Setup
 
 
-```1️⃣ Clone the Repository
-
+1️⃣ Clone the Repository
+```
 git clone https://github.com/Aditya-9753/Research-Assistant.git
 cd Research-Assistant
 ```
 
 
 
-```2️⃣ Frontend Setup
-
+2️⃣ Frontend Setup
+```
 cd frontend
 npm install
 npm run dev
@@ -125,8 +125,8 @@ npm run dev
 
 
 
-```3️⃣ Backend Setup
-
+3️⃣ Backend Setup
+```
 cd ../backend
 python -m venv venv
 venv\Scripts\activate
@@ -153,6 +153,7 @@ Multi-model AI support
 Dockerized deployment
 
 Cloud hosting
+
 
 
 
