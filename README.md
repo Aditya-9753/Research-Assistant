@@ -57,7 +57,6 @@ Backend Response
 React UI
 
 
----
 
 🛠️ Tech Stack
 
@@ -105,52 +104,43 @@ Research-Assistant/
 └── README.md
 
 
----
 
 ⚙️ Installation & Setup
 
+---
 1️⃣ Clone the Repository
 
 git clone https://github.com/Aditya-9753/Research-Assistant.git
 cd Research-Assistant
 
 
----
+
 
 2️⃣ Frontend Setup
-
+---
 cd frontend
 npm install
 npm run dev
 
 
----
+
 
 3️⃣ Backend Setup
-
+---
 cd ../backend
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 
 
----
 
-🔑 Environment Variables
-
-Create a .env file inside the backend directory:
-
-OPENAI_API_KEY=your_openai_api_key_here
-
-
----
 
 ▶️ Run Backend Server
-
+---
 uvicorn app.main:app --reload
 
 
----
+
 
 🚀 Future Enhancements
 
@@ -166,7 +156,6 @@ Cloud hosting
 
 
 
----
 
 🤝 Contribution
 
@@ -174,10 +163,8 @@ Contributions are welcome!
 Fork the repository, make your changes, and submit a pull request.
 
 
----
 
 <div align="center">
 <b>Built with ❤️ using React, FastAPI & AI</b>
 </div>
 ```
----
