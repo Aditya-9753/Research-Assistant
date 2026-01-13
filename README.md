@@ -85,7 +85,7 @@ Uvicorn
 
 
 
----
+```
 
 📂 Project Structure
 
@@ -103,7 +103,7 @@ Research-Assistant/
 │
 └── README.md
 
-
+```
 
 ⚙️ Installation & Setup
 
