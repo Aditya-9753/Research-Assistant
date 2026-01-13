@@ -133,7 +133,13 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-
+🔑 Environment Variables
+```
+Create a .env file inside the backend directory:
+Copy code
+Env
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
 ```▶️ Run Backend Server
 
