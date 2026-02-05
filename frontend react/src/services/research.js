@@ -4,58 +4,56 @@ const BASE_URL = "http://127.0.0.1:8000/api/v1";
 
 export const ResearchService = {
   async startResearch(payload = {}) {
-    // --------------------------
-    // Frontend validation
-    // --------------------------
-    if (!payload.query) {
-      throw new Error("URL is required for research");
+    // 1. Validation Logic
+    // Backend 'url' expect kar raha hai, aap 'query' bhej rahe ho frontend se
+    if (!payload.url && !payload.query) {
+      throw new Error("A valid URL is required to start research.");
     }
 
+    const finalUrl = payload.url || payload.query;
+
     try {
-      // --------------------------
-      // EXACT backend endpoint
-      // POST /api/v1/research
-      // --------------------------
+      // API call
       const response = await fetch(`${BASE_URL}/research`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
         },
         body: JSON.stringify({
-          // 🔥 Backend expects THIS schema
-          url: payload.query,
-          mode: payload.mode || "summary", // default mode
+          // 🔥 Backend schema matching:
+          url: finalUrl, 
+          mode: payload.mode || "summary", 
         }),
       });
 
-      // --------------------------
-      // Error handling
-      // --------------------------
+      // 2. Error handling (Parsing FastAPI specific error details)
       if (!response.ok) {
-        let message = "Backend returned an error";
-
+        let message = `Error: ${response.status}`;
         try {
           const err = await response.json();
-          message = err.detail || err.message || message;
-        } catch {
-          // Non-JSON error response
+          // FastAPI validation errors 'detail' key mein aate hain
+          message = Array.isArray(err.detail) 
+            ? err.detail[0].msg 
+            : err.detail || message;
+        } catch (e) {
+          /* Fallback for non-JSON errors */
         }
-
         throw new Error(message);
       }
 
-      // --------------------------
-      // Success
-      // --------------------------
+      // 3. Success
       return await response.json();
 
     } catch (error) {
       console.error("ResearchService Error:", error);
-
-      throw new Error(
-        error.message ||
-        "Connection failed. Check if FastAPI backend is running."
-      );
+      
+      // Connection Refused handling
+      if (error.message.includes("Failed to fetch")) {
+        throw new Error("Backend server is not running on http://127.0.0.1:8000");
+      }
+      
+      throw error;
     }
   },
 };

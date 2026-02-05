@@ -1,25 +1,39 @@
 # app/main.py
+import os
+import logging
+import traceback
+from typing import List
 
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from typing import List
-import traceback
-import logging
 
-from app.database.sqlite import engine, get_db   # ✅ IMPORT get_db
+# Database and Services
+from app.database.sqlite import engine, get_db
 from app.database import models
 from app.database.crud import get_history
 from app.schemas import ResearchRequest, ResearchResponse, HistoryRecord
 from app.services import process_research
 
-# Analytics router
+# Analytics
 from app.analytics.routes import router as analytics_router
 
 # -------------------------------------------------
-# Logging Setup
+# 1. Directory Setup (Safety check)
 # -------------------------------------------------
+# SQLite ke liye 'data' folder agar nahi hai toh bana do
+if not os.path.exists("./data"):
+    os.makedirs("./data")
 
+# -------------------------------------------------
+# 2. Database Init
+# -------------------------------------------------
+# Tables create karna (startup se pehle ensure karna)
+models.Base.metadata.create_all(bind=engine)
+
+# -------------------------------------------------
+# 3. Logging Config
+# -------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -27,125 +41,70 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # -------------------------------------------------
-# Database Init
+# 4. App Initialization
 # -------------------------------------------------
-
-models.Base.metadata.create_all(bind=engine)
-
-# -------------------------------------------------
-# App Initialization
-# -------------------------------------------------
-
 app = FastAPI(
     title="AI Equity Research Assistant",
-    description="Equity research API using real URL content analysis",
+    description="Advanced RAG-based Research Assistant",
     version="1.2.0",
 )
 
 # -------------------------------------------------
-# CORS
+# 5. CORS (Allow Frontend)
 # -------------------------------------------------
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=["*"], # Vikas phase mein '*' use kar sakte hain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # -------------------------------------------------
-# Startup / Shutdown
+# 6. Health & Root Endpoints
 # -------------------------------------------------
-
-@app.on_event("startup")
-def on_startup():
-    logger.info("🚀 Application startup completed")
-
-
-@app.on_event("shutdown")
-def on_shutdown():
-    logger.info("🛑 Application shutdown completed")
-
-# -------------------------------------------------
-# Health
-# -------------------------------------------------
-
 @app.get("/", tags=["Health"])
 def root():
-    return {
-        "status": "running",
-        "service": "AI Equity Research Assistant",
-        "docs": "/docs",
-    }
-
+    return {"status": "online", "message": "Research API is active"}
 
 @app.get("/health", tags=["Health"])
 def health_check():
     return {"status": "ok"}
 
 # -------------------------------------------------
-# API v1 – Research
+# 7. Research Endpoint (Deep Scan Logic)
 # -------------------------------------------------
-
 @app.post(
     "/api/v1/research",
     response_model=ResearchResponse,
-    tags=["Research"],
-    status_code=status.HTTP_200_OK,
+    tags=["Research"]
 )
-def research_endpoint(
-    req: ResearchRequest,
-    db: Session = Depends(get_db),
-):
+def research_endpoint(req: ResearchRequest, db: Session = Depends(get_db)):
     try:
-        logger.info(f"📥 Research request received | mode={req.mode}")
+        logger.info(f"📥 Deep Scan Request: {req.url} | Mode: {req.mode}")
+        # process_research ab RAG use karega (updated services.py ke saath)
         return process_research(db, req.url, req.mode)
 
     except ValueError as exc:
         logger.warning(f"⚠️ Validation error: {exc}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc),
+            detail=str(exc)
         )
-
-    except Exception:
-        logger.error("🔥 Internal server error during research")
+    except Exception as e:
+        logger.error(f"🔥 Deep Scan Failed: {str(e)}")
         traceback.print_exc()
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal server error",
+            status_code=500,
+            detail="Research failed. AI model or Scraper issue."
         )
 
 # -------------------------------------------------
-# API v1 – History
+# 8. History & Analytics Routers
 # -------------------------------------------------
-
-@app.get(
-    "/api/v1/history",
-    response_model=List[HistoryRecord],
-    tags=["History"],
-)
-def history_endpoint(
-    limit: int = 10,
-    db: Session = Depends(get_db),
-):
-    if limit < 1 or limit > 100:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Limit must be between 1 and 100",
-        )
-
+@app.get("/api/v1/history", response_model=List[HistoryRecord], tags=["History"])
+def history_endpoint(limit: int = 10, db: Session = Depends(get_db)):
     return get_history(db, limit)
 
-# -------------------------------------------------
-# API v1 – Analytics
-# -------------------------------------------------
-
-app.include_router(
-    analytics_router,
-    prefix="/api/v1",
-)
+# Analytics Router include karna
+app.include_router(analytics_router, prefix="/api/v1") 
